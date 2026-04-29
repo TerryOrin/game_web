@@ -1,474 +1,173 @@
-<!DOCTYP    <!-- Favicon -->
-    <link rel="icon" href="assets/images/logo.png" type="image/png">html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8                <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo">>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>下載艾爾芙卡 - 三平台支援</title>
-    <meta name="description" content="Windows、Android、iOS 三平台下載，立即體驗創新戰棋遊戲">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/brand-new.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* 下載頁面專用樣式 */
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-            margin: var(--space-xl) 0;
-        }
-        
-        .download-card {
-            background: var(--card);
-            border: 1px solid #1b2533;
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            text-align: center;
-            transition: all var(--duration-enter) ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="noise" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23noise)"/></svg>');
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .download-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--pri);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .download-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto var(--space-md);
-            background: var(--pri);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: var(--ink);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .download-card h3 {
-            color: var(--acc);
-            margin-bottom: var(--space-sm);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .download-card p {
-            color: var(--muted);
-            margin-bottom: var(--space-md);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .download-btn {
-            background: var(--pri);
-            color: var(--ink);
-            border: none;
-            border-radius: var(--radius-md);
-            padding: var(--space-sm) var(--space-md);
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            cursor: pointer;
-            transition: all var(--duration-enter) ease-out;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .download-btn:hover {
-            background: #4A8AD6;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .install-steps {
-            background: rgba(18, 24, 33, 0.5);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-        
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-md);
-        }
-        
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background: var(--pri);
-            color: var(--ink);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        
-        .step-content h4 {
-            color: var(--acc);
-            margin-bottom: var(--space-xs);
-        }
-        
-        .step-content p {
-            color: var(--muted);
-            margin-bottom: 0;
-        }
-    </style>
+    <title>艾爾芙卡下載試玩 | PC 版戰棋試玩包</title>
+    <meta name="description" content="下載艾爾芙卡 PC 版試玩包，直接體驗三人編隊、戰前站位、地形高度、強化攻擊與正式版角色陣容。">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/elvka-refresh.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+<body class="site-body page-download">
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html">
+                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <span class="brand-text">
+                        <span class="brand-title">艾爾芙卡 ELVKA</span>
+                        <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
+                    </span>
+                </a>
+                <nav class="site-nav" aria-label="主要導覽">
+                    <a href="index.html">首頁</a>
+                    <a href="world.html">世界展示</a>
+                    <a href="characters.html">角色展示</a>
+                    <a href="gameplay.html">玩法介紹</a>
+                    <a class="is-active" href="download.html">下載試玩</a>
+                </nav>
+            </div>
+        </header>
 
-<body>
-    <!-- 預載器 -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
+        <main>
+            <section class="page-hero">
+                <div class="container page-hero-grid">
+                    <div class="page-copy">
+                        <span class="eyebrow">Download / PC Demo</span>
+                        <h1 class="page-title">下載 PC 版試玩，<span class="accent">直接進入赤城裂縫前線</span></h1>
+                        <p class="page-lead">目前公開試玩以 PC 版本為主。你可以直接體驗正式版的三人編隊、戰前站位、地形高度、行動點數與角色強化攻擊條件。</p>
+                        <div class="download-hero-actions">
+                            <a class="btn" href="builds/elvka-windows.zip" download><i class="fa-brands fa-windows"></i>下載 PC 試玩包</a>
+                            <a class="btn btn-secondary" href="https://www.instagram.com/elvka_game/" target="_blank" rel="noreferrer"><i class="fa-brands fa-instagram"></i>追蹤 Instagram</a>
+                        </div>
+                        <p class="download-path">下載入口：<strong>builds/elvka-windows.zip</strong></p>
+                        <div class="pill-row">
+                            <span>PC 平台</span>
+                            <span>每關約 3~5 分鐘</span>
+                            <span>正式版核心系統</span>
+                        </div>
+                    </div>
+                    <div class="page-visual">
+                        <img src="assets/images/elvka/ig-qrcode.png" alt="艾爾芙卡 Instagram QR Code">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">試玩內容</span>
+                        <h2>這個版本最適合用來認識正式版的三個關鍵面向</h2>
+                    </div>
+
+                    <div class="platform-grid">
+                        <article class="platform-card">
+                            <span class="status-pill is-soon">立即可玩</span>
+                            <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
+                            <h3>三人編隊與戰前部署</h3>
+                            <p>先從角色池挑出三人，再把她們排進指定區域，正式版的戰術壓力從這裡就開始了。</p>
+                            <ul class="mini-list">
+                                <li>角色選擇會直接改變開局優勢</li>
+                                <li>站位本身就是第一層戰術</li>
+                            </ul>
+                        </article>
+                        <article class="platform-card">
+                            <span class="status-pill is-soon">立即可玩</span>
+                            <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                            <h3>地形高度與引爆規則</h3>
+                            <p>高度 1 到 3 級的差異、高地優勢、推落傷害與地形引爆，是這個版本最值得先熟悉的內容。</p>
+                            <ul class="mini-list">
+                                <li>角色技能本身就會改變地形</li>
+                                <li>推擠與高度落差能直接擴大戰果</li>
+                            </ul>
+                        </article>
+                        <article class="platform-card">
+                            <span class="status-pill is-soon">立即可玩</span>
+                            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <h3>10 點行動與強化攻擊</h3>
+                            <p>每回合 10 點行動點數，搭配每位角色不同的強化攻擊條件，會直接決定整回合的爆發方式。</p>
+                            <ul class="mini-list">
+                                <li>可集中單角，也可整隊同步推進</li>
+                                <li>強化攻擊有收益，也有代價</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container download-layout">
+                    <article class="contact-panel">
+                        <span class="section-kicker">下載之後</span>
+                        <h3 class="contact-title">把壓縮檔解開，親自試一次正式版的配隊、站位與搶高地節奏</h3>
+                        <p>如果你想追蹤版本更新、後續展演或試玩消息，官方 Instagram 和聯絡信箱都會持續保留。</p>
+                        <img class="qr-image" src="assets/images/elvka/ig-qrcode.png" alt="艾爾芙卡 Instagram QR Code">
+                        <div class="contact-actions">
+                            <a class="btn" href="https://www.instagram.com/elvka_game/" target="_blank" rel="noreferrer"><i class="fa-brands fa-instagram"></i>追蹤 Instagram</a>
+                            <a class="btn btn-secondary" href="mailto:elvka.game@gmail.com"><i class="fa-solid fa-envelope"></i>寄信給團隊</a>
+                        </div>
+                    </article>
+
+                    <div class="timeline">
+                        <article class="timeline-step">
+                            <div class="timeline-index">1</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">下載試玩壓縮檔</h3>
+                                <p>主按鈕會直接指向目前公開的 PC 版試玩包。</p>
+                            </div>
+                        </article>
+                        <article class="timeline-step">
+                            <div class="timeline-index">2</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">解壓並啟動遊戲</h3>
+                                <p>將壓縮檔解壓至本機資料夾，依版本附帶內容啟動遊戲。</p>
+                            </div>
+                        </article>
+                        <article class="timeline-step">
+                            <div class="timeline-index">3</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">從赤城戰線開始熟悉規則</h3>
+                                <p>先熟悉三人編隊、地形等級與強化攻擊條件，後續就更容易掌握每位角色的回合價值。</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <article class="quote-panel">
+                        <p>這個試玩版本最適合做的事，不是先背招，而是先親手感受正式版如何把配隊、站位與高度規則綁成同一套戰術。</p>
+                        <span>試玩入口</span>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-panel">
+                <section>
+                    <h2 class="footer-title">艾爾芙卡 ELVKA</h2>
+                    <p class="footer-copy">PC 試玩版已整理好下載入口，能直接體驗正式版的三人編隊、地形與強化攻擊系統。</p>
+                </section>
+                <section>
+                    <h3 class="panel-title">頁面導覽</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="world.html">世界展示</a></li>
+                        <li><a href="characters.html">角色展示</a></li>
+                        <li><a href="gameplay.html">玩法介紹</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="panel-title">開發資訊</h3>
+                    <p class="footer-meta">團隊：結束樂隊</p>
+                    <p class="footer-meta">指導教授：廖世傑、吳思璿</p>
+                    <p class="footer-meta">聯絡信箱：elvka.game@gmail.com</p>
+                </section>
+            </div>
+        </footer>
     </div>
-
-    <!-- 導航列 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index-new.html" class="nav-brand">
-                <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo">
-                艾爾芙卡
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index-new.html" class="nav-link">首頁</a></li>
-                <li><a href="download.html" class="nav-link active">下載點</a></li>
-                <li><a href="world.html" class="nav-link">世界展示</a></li>
-                <li><a href="characters.html" class="nav-link">角色展示</a></li>
-                <li><a href="gameplay.html" class="nav-link">玩法介紹</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero 區塊 -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
-                <div class="hero-text">
-                    <h1 class="hero-title">下載艾爾芙卡</h1>
-                    <p class="hero-subtitle">支援 Windows、Android、iOS 三大平台</p>
-                    <p class="hero-description">
-                        立即開始您的聲音戰棋冒險之旅。選擇適合您裝置的版本，體驗前所未有的地形變化戰棋遊戲。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 下載區域 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">選擇您的平台</h2>
-            <div class="download-grid">
-                <!-- Windows -->
-                <div class="download-card">
-                    <div class="download-icon">
-                        <i class="fab fa-windows"></i>
-                    </div>
-                    <h3>Windows 版本</h3>
-                    <p>適用於 Windows 10/11<br>檔案大小：約 150MB</p>
-                    <a href="builds/win_build.zip" class="download-btn" download>
-                        <i class="fas fa-download"></i>
-                        下載 ZIP 檔案
-                    </a>
-                </div>
-
-                <!-- Android -->
-                <div class="download-card">
-                    <div class="download-icon">
-                        <i class="fab fa-android"></i>
-                    </div>
-                    <h3>Android 版本</h3>
-                    <p>適用於 Android 7.0+<br>檔案大小：約 120MB</p>
-                    <a href="builds/android_build.apk" class="download-btn" download>
-                        <i class="fas fa-download"></i>
-                        下載 APK 檔案
-                    </a>
-                </div>
-
-                <!-- iOS -->
-                <div class="download-card">
-                    <div class="download-icon">
-                        <i class="fab fa-apple"></i>
-                    </div>
-                    <h3>iOS 版本</h3>
-                    <p>透過 TestFlight 測試<br>適用於 iOS 12.0+</p>
-                    <a href="https://testflight.apple.com/join/example" class="download-btn" target="_blank">
-                        <i class="fas fa-external-link-alt"></i>
-                        前往 TestFlight
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 安裝指南 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">安裝指南</h2>
-            
-            <!-- Windows 安裝步驟 -->
-            <div class="install-steps">
-                <h3 style="color: var(--acc); margin-bottom: var(--space-md);">
-                    <i class="fab fa-windows" style="margin-right: var(--space-xs);"></i>
-                    Windows 安裝步驟
-                </h3>
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>下載檔案</h4>
-                        <p>點擊上方 Windows 下載按鈕，下載 win_build.zip 檔案至您的電腦。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>解壓縮檔案</h4>
-                        <p>右鍵點擊下載的 ZIP 檔案，選擇「解壓縮到此處」或使用解壓縮軟體。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>執行遊戲</h4>
-                        <p>進入解壓縮後的資料夾，雙擊 ELVKA.exe 檔案即可開始遊戲。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Android 安裝步驟 -->
-            <div class="install-steps">
-                <h3 style="color: var(--acc); margin-bottom: var(--space-md);">
-                    <i class="fab fa-android" style="margin-right: var(--space-xs);"></i>
-                    Android 安裝步驟
-                </h3>
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>允許未知來源</h4>
-                        <p>前往設定 → 安全性 → 允許安裝來自未知來源的應用程式。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>下載安裝</h4>
-                        <p>下載 APK 檔案後，點擊檔案進行安裝，按照提示完成安裝程序。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>開始遊戲</h4>
-                        <p>安裝完成後，在應用程式列表中找到艾爾芙卡圖示，點擊即可開始遊戲。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- iOS 安裝步驟 -->
-            <div class="install-steps">
-                <h3 style="color: var(--acc); margin-bottom: var(--space-md);">
-                    <i class="fab fa-apple" style="margin-right: var(--space-xs);"></i>
-                    iOS 安裝步驟（TestFlight）
-                </h3>
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>安裝 TestFlight</h4>
-                        <p>從 App Store 下載並安裝 Apple 官方的 TestFlight 應用程式。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>接受邀請</h4>
-                        <p>點擊上方 TestFlight 連結，接受測試邀請並加入艾爾芙卡測試計畫。</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>安裝遊戲</h4>
-                        <p>在 TestFlight 中找到艾爾芙卡，點擊安裝即可下載測試版本。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 系統需求 -->
-    <section class="section" style="background: rgba(18, 24, 33, 0.5);">
-        <div class="container">
-            <h2 class="section-title">系統需求</h2>
-            <div class="grid grid-3">
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fab fa-windows"></i>
-                        Windows 需求
-                    </div>
-                    <div class="card-content">
-                        <p><strong>作業系統：</strong>Windows 10/11</p>
-                        <p><strong>處理器：</strong>Intel i3 或同等級</p>
-                        <p><strong>記憶體：</strong>4 GB RAM</p>
-                        <p><strong>儲存空間：</strong>500 MB</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fab fa-android"></i>
-                        Android 需求
-                    </div>
-                    <div class="card-content">
-                        <p><strong>作業系統：</strong>Android 7.0+</p>
-                        <p><strong>RAM：</strong>3 GB 以上</p>
-                        <p><strong>儲存空間：</strong>200 MB</p>
-                        <p><strong>網路：</strong>需要網路連線進行匹配</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fab fa-apple"></i>
-                        iOS 需求
-                    </div>
-                    <div class="card-content">
-                        <p><strong>作業系統：</strong>iOS 12.0+</p>
-                        <p><strong>裝置：</strong>iPhone 6s 或更新機型</p>
-                        <p><strong>儲存空間：</strong>200 MB</p>
-                        <p><strong>網路：</strong>需要網路連線進行匹配</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 頁腳 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>艾爾芙卡</h3>
-                    <p>在『聲音』中改寫地形的戰棋對決</p>
-                    <p>電子世界『艾爾芙卡』：能以正確的聲音創造、摧毀與改變萬物。</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>快速連結</h3>
-                    <ul>
-                        <li><a href="download.html">下載遊戲</a></li>
-                        <li><a href="world.html">世界觀</a></li>
-                        <li><a href="characters.html">角色介紹</a></li>
-                        <li><a href="gameplay.html">遊戲玩法</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>開發團隊</h3>
-                    <p><strong>結束樂隊</strong></p>
-                    <p>指導教授：廖世傑、吳思璿</p>
-                    <ul>
-                        <li>蘇柏穎</li>
-                        <li>黃鉉展</li>
-                        <li>唐義君</li>
-                        <li>陳廷安</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>聯絡我們</h3>
-                    <div class="contact-info">
-                        <p>追蹤我們的最新動態</p>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/elvka_game/" target="_blank" class="social-link">
-                                <img src="assets/images/IG_0.png" alt="Instagram" style="width: 32px; height: 32px; margin-right: 8px;">
-                                @elvka_game
-                            </a>
-                        </div>
-                        <div class="qr-section">
-                            <p style="margin-bottom: var(--space-xs); color: var(--muted); font-size: 0.9rem;">掃描 QR Code 關注我們</p>
-                            <img src="assets/images/qrcode.png" alt="Instagram QR Code" class="qr-code">
-                        </div>
-                        <div class="contact-details">
-                            <p><strong>開發團隊：</strong>結束樂隊</p>
-                            <p><strong>聯絡信箱：</strong>elvka.game@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 艾爾芙卡 - 結束樂隊. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // 預載器
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.body.classList.add('loaded');
-            }, 500);
-        });
-
-        // 導航列滾動效果
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // 滾動動畫
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
-
-        // 觀察所有卡片
-        document.querySelectorAll('.card, .download-card, .install-steps').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>

@@ -3,575 +3,501 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                 <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo">  <title>艾爾芙卡角色介紹 - 聲音戰士們</title>
-    <meta name="description" content="認識卡兒芬、瑠波等獨特角色，了解他們的專屬武器、技能與使用率統計">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/brand-new.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        /* 角色頁面專用樣式 */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-xl);
-            margin: var(--space-xl) 0;
-        }
-        
-        .character-card {
-            background: var(--card);
-            border: 1px solid #1b2533;
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            transition: all var(--duration-enter) ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .character-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="noise" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23noise)"/></svg>');
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .character-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--pri);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .character-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .character-image {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 2px solid var(--pri);
-            flex-shrink: 0;
-        }
-        
-        .character-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .character-info h3 {
-            color: var(--acc);
-            margin-bottom: var(--space-xs);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .character-weapon {
-            color: var(--muted);
-            font-size: 0.875rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .character-description {
-            color: var(--muted);
-            margin-bottom: var(--space-md);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .character-stats {
-            display: flex;
-            gap: var(--space-xs);
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .stat-badge {
-            background: var(--pri);
-            color: var(--ink);
-            padding: 4px 8px;
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        
-        .chart-container {
-            background: var(--card);
-            border: 1px solid #1b2533;
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-        
-        .chart-title {
-            color: var(--acc);
-            text-align: center;
-            margin-bottom: var(--space-md);
-        }
-        
-        .pixel-character {
-            width: 100%;
-            height: auto;
-            max-width: 120px;
-        }
-    </style>
+    <title>艾爾芙卡角色展示 | 六位正式角色與強化攻擊條件</title>
+    <meta name="description" content="查看艾爾芙卡正式版六位角色的出身、武器、技能與強化攻擊方向，並直接觀看角色技能與強化攻擊影片。">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/elvka-refresh.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+<body class="site-body page-characters">
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html">
+                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <span class="brand-text">
+                        <span class="brand-title">艾爾芙卡 ELVKA</span>
+                        <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
+                    </span>
+                </a>
+                <nav class="site-nav" aria-label="主要導覽">
+                    <a href="index.html">首頁</a>
+                    <a href="world.html">世界展示</a>
+                    <a class="is-active" href="characters.html">角色展示</a>
+                    <a href="gameplay.html">玩法介紹</a>
+                    <a href="download.html">下載試玩</a>
+                </nav>
+            </div>
+        </header>
 
-<body>
-    <!-- 預載器 -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
+        <main>
+            <section class="page-hero">
+                <div class="container page-hero-grid">
+                    <div class="page-copy">
+                        <span class="eyebrow">正式角色 / 影片 / 技能條件</span>
+                        <h1 class="page-title">六位正式角色，六種<span class="accent">高度與條件的解法</span></h1>
+                        <p class="page-lead">正式版目前以六位角色構成核心陣容。她們來自前哨站、赤城與特林部落，各自綁定不同的技能改地方式與強化攻擊條件，讓配隊本身就成為戰術選擇。</p>
+                        <div class="pill-row">
+                            <span>6 位正式角色</span>
+                            <span>3 個主要陣營</span>
+                            <span>技能改地形</span>
+                            <span>強化攻擊條件</span>
+                        </div>
+                    </div>
+                    <div class="page-visual">
+                        <img src="assets/images/elvka/characters/xuanduo.png" alt="懸舵完整立繪">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">角色陣容</span>
+                        <h2>每位角色都不是單一輸出定位，而是一套和地形規則一起運作的條件組</h2>
+                        <p>正式企畫書中的角色介紹已經非常明確：武器、種族、陣營、技能方向與強化攻擊都會直接影響隊伍組法。</p>
+                    </div>
+
+                    <div class="character-grid">
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/liubo_head.png" alt="琉波頭像"></div>
+                                <h3 class="roster-name">琉波<span>前哨站 / 潮汐之子</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/liubo.png" alt="琉波立繪"></div>
+                            <p class="lead-copy">前哨站站長的女兒，也是能操控水魔法的潮汐之子。她不常主動交談，更常透過水氣流動去感知周遭。</p>
+                            <div class="tag-list">
+                                <span>水魔法</span>
+                                <span>降地形</span>
+                                <span>直線強攻</span>
+                            </div>
+                        </article>
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/jiangying_head.png" alt="絳纓頭像"></div>
+                                <h3 class="roster-name">絳纓<span>赤城 / 血族</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/jiangying.png" alt="絳纓立繪"></div>
+                            <p class="lead-copy">赤城醫療部門的血族文書官。外表幹練安靜，實際上內心戲很多，經常被迫處理一堆莫名其妙的麻煩。</p>
+                            <div class="tag-list">
+                                <span>印記牽制</span>
+                                <span>斜十字位移</span>
+                                <span>等級 2 地形</span>
+                            </div>
+                        </article>
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/shirin_head.png" alt="獅鈴頭像"></div>
+                                <h3 class="roster-name">獅鈴<span>前哨站 / 特林</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/shirin.png" alt="獅鈴立繪"></div>
+                            <p class="lead-copy">膽子很小、被嚇到就會炸毛的貓人少女。她的獅子裝原本只是生存策略，後來卻意外擁有了自我意識。</p>
+                            <div class="tag-list">
+                                <span>跳躍切入</span>
+                                <span>三點塑形</span>
+                                <span>位移回復</span>
+                            </div>
+                        </article>
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/xuanduo_head.png" alt="懸舵頭像"></div>
+                                <h3 class="roster-name">懸舵<span>前哨站 / 潮汐之子</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/xuanduo.png" alt="懸舵立繪"></div>
+                            <p class="lead-copy">曾是四海聞名的傳奇船長，卻因一場意外失去記憶與同伴。她在荒島撿到的古書，如今仍持續牽動裂縫異象。</p>
+                            <div class="tag-list">
+                                <span>暈眩控制</span>
+                                <span>延時升地</span>
+                                <span>古書異象</span>
+                            </div>
+                        </article>
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/vilis_head.png" alt="維爾莉絲頭像"></div>
+                                <h3 class="roster-name">維爾莉絲<span>薩爾維恩家族 / 血族</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/vilis.png" alt="維爾莉絲立繪"></div>
+                            <p class="lead-copy">血族高等貴族，對繁瑣禮儀毫無興趣，卻保留了最華麗的貴族風貌。她極度熱愛美食，也會為了食物與廚師直接開戰。</p>
+                            <div class="tag-list">
+                                <span>續戰回復</span>
+                                <span>印記施加</span>
+                                <span>高度 2 連動</span>
+                            </div>
+                        </article>
+                        <article class="roster-card">
+                            <div class="roster-header">
+                                <div class="roster-head"><img src="assets/images/elvka/heads/bevita_head.png" alt="貝維塔頭像"></div>
+                                <h3 class="roster-name">貝維塔<span>前哨站 / 特林</span></h3>
+                            </div>
+                            <div class="roster-art"><img src="assets/images/elvka/characters/bevita.png" alt="貝維塔立繪"></div>
+                            <p class="lead-copy">身材高挑、性格直率爽朗的特林戰士。她總是第一個站出來保護同伴，也是赤城裂縫第一時間的阻擊者。</p>
+                            <div class="tag-list">
+                                <span>前線護陣</span>
+                                <span>範圍防禦</span>
+                                <span>高傷代價</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">代表技能卡</span>
+                        <h2>技能卡對應的不是裝飾插圖，而是每位角色最值得圍繞的條件與出手邏輯</h2>
+                        <p>正式版的角色能力幾乎都和高度、位移或條件切換有關，技能卡正好替這些差異做出最直接的視覺標記。</p>
+                    </div>
+
+                    <div class="skill-grid">
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Liubo_C1ult.png" alt="琉波代表技能卡">
+                            <h3>琉波 / 靜海沉降</h3>
+                            <p>四方向選擇一路降地，同時對敵方造成傷害，節奏非常適合開路與拆地形。</p>
+                        </article>
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Jiangying_C4ult.png" alt="絳纓代表技能卡">
+                            <h3>絳纓 / 印記調度</h3>
+                            <p>能把隊友拉向關鍵斜十字位，並把位置固定成等級 2，支援味非常濃。</p>
+                        </article>
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Shirin_C2ult.png" alt="獅鈴代表技能卡">
+                            <h3>獅鈴 / 踏山嶽</h3>
+                            <p>一次指定三個位置變成等級 3，再依序跳入，能把路線與高度一起重寫。</p>
+                        </article>
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Xuanduo_C5ult.png" alt="懸舵代表技能卡">
+                            <h3>懸舵 / 奇點</h3>
+                            <p>能選定全場 4x4 區域延時升地並造成傷害，是很直接的控場型技能。</p>
+                        </article>
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Vilis_C8ult.png" alt="維爾莉絲代表技能卡">
+                            <h3>維爾莉絲 / 血族印記</h3>
+                            <p>將自身腳底與指定方向抬成等級 2，命中時還能留下專屬印記。</p>
+                        </article>
+                        <article class="skill-card">
+                            <img src="assets/images/elvka/cards/Bevita_C7ult.png" alt="貝維塔代表技能卡">
+                            <h3>貝維塔 / 護陣防線</h3>
+                            <p>把周圍地形壓成等級 1，並給範圍內友軍防禦，是很明確的站線核心。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">角色動態圖庫 / GIF</span>
+                        <h2>把待機、攻擊、受擊、抓取與技能節奏直接放進角色頁</h2>
+                        <p>這批 GIF 直接取自 character_art{for_web} 素材，並依原始檔名分類整理，方便你快速對照每位角色的動作內容與演出氣質。</p>
+                    </div>
+
+                    <div class="motion-gallery">
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">琉波 / GIF 動態</span>
+                                    <h3 class="panel-title">先看她怎麼待機、拆地、受擊，再看直線輸出的節奏變化</h3>
+                                </div>
+                                <p class="lead-copy">琉波的素材很清楚地拆成待機、抓取、受擊、攻擊與技能五段，正好對應她偏控制與開路的出手感。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/liubo/animation[idle fix].gif" alt="琉波待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animation[idle fix].gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/liubo/animation[attack fix].gif" alt="琉波攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack fix].gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/liubo/animation[skill].gif" alt="琉波技能動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能</strong><span>animation[skill].gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/liubo/animation[GRAB].gif" alt="琉波抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animation[GRAB].gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/liubo/animation[hit]elvka4.gif" alt="琉波受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[hit]elvka4.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">絳纓 / GIF 動態</span>
+                                    <h3 class="panel-title">調度、壓制與血族文書官的冷靜節拍都能直接看見</h3>
+                                </div>
+                                <p class="lead-copy">絳纓的動態不靠誇張前搖，而是靠俐落的節奏切換撐起存在感，和她的支援定位很一致。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/jiangying/animation[IDLE]elvka6.gif" alt="絳纓待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animation[IDLE]elvka6.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/jiangying/animation[attack2.0]elvka6.gif" alt="絳纓攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack2.0]elvka6.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/jiangying/animation[skill]elvka6.gif" alt="絳纓技能動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能</strong><span>animation[skill]elvka6.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/jiangying/animation[grab]elvka6.gif" alt="絳纓抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animation[grab]elvka6.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/jiangying/animation[hit]elvka6.gif" alt="絳纓受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[hit]elvka6.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">獅鈴 / GIF 動態</span>
+                                    <h3 class="panel-title">跳躍感最強的一位，連技能也切成兩段動作展示</h3>
+                                </div>
+                                <p class="lead-copy">獅鈴的 GIF 能直接看出她偏高機動、偏突入的節奏，兩段技能也保留了原始切分。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animation[IDLE]elvka5.gif" alt="獅鈴待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animation[IDLE]elvka5.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animation[attack]elvka5.gif" alt="獅鈴攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack]elvka5.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animation[skill1]elvka5.gif" alt="獅鈴技能一動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能 1</strong><span>animation[skill1]elvka5.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animation[skill2]elvka5.gif" alt="獅鈴技能二動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能 2</strong><span>animation[skill2]elvka5.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animationGRABelvka5.gif" alt="獅鈴抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animationGRABelvka5.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/shirin/animation[hit]elvka5.gif" alt="獅鈴受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[hit]elvka5.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">懸舵 / GIF 動態</span>
+                                    <h3 class="panel-title">從待機到技能都帶著一種壓場感，能補足她在影片外的角色氣質</h3>
+                                </div>
+                                <p class="lead-copy">懸舵的演出不只是攻擊，而是把控制與古書異象的重量感一起做進動作節拍裡。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/xuanduo/animation[IDLE]elvka7.gif" alt="懸舵待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animation[IDLE]elvka7.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/xuanduo/animation[attack]elvka7.gif" alt="懸舵攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack]elvka7.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/xuanduo/animation[skill]elvka7.gif" alt="懸舵技能動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能</strong><span>animation[skill]elvka7.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/xuanduo/animation[GRAB]elvka7.gif" alt="懸舵抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animation[GRAB]elvka7.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/xuanduo/animation[hit]elvka7.gif" alt="懸舵受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[hit]elvka7.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">維爾莉絲 / GIF 動態</span>
+                                    <h3 class="panel-title">優雅、侵略與續戰感同時存在，連待機姿態都很有角色性</h3>
+                                </div>
+                                <p class="lead-copy">維爾莉絲的 GIF 很適合補上她在設定裡那種高等血族的從容感與壓迫感。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/vielris/animationIDLE3.0elvka8.gif" alt="維爾莉絲待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animationIDLE3.0elvka8.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/vielris/animation[attack]elvka8.gif" alt="維爾莉絲攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack]elvka8.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/vielris/animation[skill4.0]elvka8.gif" alt="維爾莉絲技能動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能</strong><span>animation[skill4.0]elvka8.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/vielris/animation[grab]elvka8.gif" alt="維爾莉絲抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animation[grab]elvka8.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/vielris/animation[hit]elvka8.gif" alt="維爾莉絲受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[hit]elvka8.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+
+                        <article class="surface-panel motion-group">
+                            <div class="motion-group-head">
+                                <div>
+                                    <span class="section-kicker">貝維塔 / GIF 動態</span>
+                                    <h3 class="panel-title">站在第一線的人該有的重量、碰撞感與保護性格都在這裡</h3>
+                                </div>
+                                <p class="lead-copy">貝維塔的素材最有前線硬碰硬的感覺，很適合補強她作為護陣核心時的壓迫演出。</p>
+                            </div>
+                            <div class="motion-grid">
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/bevita/animation[IDLE]elvka9.gif" alt="貝維塔待機動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>待機</strong><span>animation[IDLE]elvka9.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/bevita/animation[attack]elvka9.gif" alt="貝維塔攻擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>攻擊</strong><span>animation[attack]elvka9.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/bevita/animation[skill]elvka9.gif" alt="貝維塔技能動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>技能</strong><span>animation[skill]elvka9.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/bevita/animation[grab]elvka9.gif" alt="貝維塔抓取動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>抓取</strong><span>animation[grab]elvka9.gif</span></figcaption>
+                                </figure>
+                                <figure class="motion-card">
+                                    <div class="motion-frame"><img src="assets/media/elvka/gifs/bevita/animation[HIT]elvka9.gif" alt="貝維塔受擊動態圖" loading="lazy" decoding="async"></div>
+                                    <figcaption><strong>受擊</strong><span>animation[HIT]elvka9.gif</span></figcaption>
+                                </figure>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">角色實戰片段</span>
+                        <h2>角色影片已按照正式版名稱與功能重新整理</h2>
+                        <p>每支本地影片都對應一位角色的技能或強化攻擊，方便你直接對照企畫書裡的條件設計。</p>
+                    </div>
+
+                    <div class="video-grid">
+                        <article class="video-card">
+                            <div class="video-meta"><h3>琉波 / 技能</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/LiupoSkill.mp4" type="video/mp4"></video></div>
+                            <p>觀看她如何用降地形的方式拆掉敵方站位與高度優勢。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>琉波 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/LiupoExAttack.mp4" type="video/mp4"></video></div>
+                            <p>強化後能打出超長直線威脅，是很明確的收束手段。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>絳纓 / 技能</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Jiangying_Skill.mp4" type="video/mp4"></video></div>
+                            <p>重點不只是位移，而是她怎麼把隊友丟進更好的高度條件裡。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>絳纓 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Jiangying_EXAttack.mp4" type="video/mp4"></video></div>
+                            <p>強化普攻會改成印記壓制，讓她從文書官直接變成節奏點製造者。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>獅鈴 / 技能</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/ShilinSkill.mp4" type="video/mp4"></video></div>
+                            <p>她的核心是先把三個位置抬成高地，再照順序把自己送進去。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>獅鈴 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/ShilinExAttack.mp4" type="video/mp4"></video></div>
+                            <p>強化版能切入敵人身後、打傷害、順手回復，是非常靈活的單點工具。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>懸舵 / 基本攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/XuandoSimpleAttack.mp4" type="video/mp4"></video></div>
+                            <p>先看她的普通進場方式，再更容易理解後面暈眩控場的價值。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>懸舵 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/XuandoExAttack.mp4" type="video/mp4"></video></div>
+                            <p>她的強化攻擊是很直接的十字暈眩控制，能把敵人回合整個鎖住。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>維爾莉絲 / 技能</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Vilis_Skill.mp4" type="video/mp4"></video></div>
+                            <p>技能會同時調整自身腳底與指定方向高度，適合做續戰前置。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>維爾莉絲 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Vilis_EXAttack.mp4" type="video/mp4"></video></div>
+                            <p>強化普攻能直接回復自身生命值，是血族續戰最鮮明的展示。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>貝維塔 / 技能</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Bevita_Skill.mp4" type="video/mp4"></video></div>
+                            <p>把周圍壓成等級 1 並給友軍防禦，正是她扛住第一線的原因。</p>
+                        </article>
+                        <article class="video-card">
+                            <div class="video-meta"><h3>貝維塔 / 強化攻擊</h3><span class="video-label">Local MP4</span></div>
+                            <div class="video-frame"><video controls preload="metadata" playsinline muted><source src="assets/media/elvka/Bevita_EXAttack.mp4" type="video/mp4"></video></div>
+                            <p>她的強化攻擊會消耗生命值換取極高傷害，是很典型的高風險強開。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <article class="quote-panel">
+                        <p>正式版六位角色的差異，不是誰的數值更高，而是誰能在對的高度、對的順序、對的代價下把整回合撐起來。</p>
+                        <span>角色設計核心</span>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-panel">
+                <section>
+                    <h2 class="footer-title">艾爾芙卡 ELVKA</h2>
+                    <p class="footer-copy">六位正式角色，六套與高度、位移、印記與強化攻擊相連動的戰術條件。</p>
+                </section>
+                <section>
+                    <h3 class="panel-title">頁面導覽</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="world.html">世界展示</a></li>
+                        <li><a href="gameplay.html">玩法介紹</a></li>
+                        <li><a href="download.html">下載試玩</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="panel-title">開發資訊</h3>
+                    <p class="footer-meta">團隊：結束樂隊</p>
+                    <p class="footer-meta">指導教授：廖世傑、吳思璿</p>
+                    <p class="footer-meta">聯絡信箱：elvka.game@gmail.com</p>
+                </section>
+            </div>
+        </footer>
     </div>
-
-    <!-- 導航列 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index-new.html" class="nav-brand">
-                <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo">
-                艾爾芙卡
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index-new.html" class="nav-link">首頁</a></li>
-                <li><a href="download.html" class="nav-link">下載點</a></li>
-                <li><a href="world.html" class="nav-link">世界展示</a></li>
-                <li><a href="characters.html" class="nav-link active">角色展示</a></li>
-                <li><a href="gameplay.html" class="nav-link">玩法介紹</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero 區塊 -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
-                <div class="hero-text">
-                    <h1 class="hero-title">聲音戰士</h1>
-                    <p class="hero-subtitle">每位角色都掌握著獨特的聲音力量</p>
-                    <p class="hero-description">
-                        在艾爾芙卡的世界中，音樂家們用他們的聲音和樂器改變戰場。
-                        每位戰士都有專屬的武器、技能和戰鬥風格。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 角色展示 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">可操控角色</h2>
-            <div class="character-grid">
-                <!-- 卡兒芬 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <img src="assets/images/琉波像素小人(大圖)_0.png" alt="卡兒芬" class="pixel pixel-character">
-                        </div>
-                        <div class="character-info">
-                            <h3>卡兒芬</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-music"></i> 古典豎琴
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        精通古典音樂的優雅戰士，擅長使用豎琴創造和諧的音波攻擊。
-                        她的技能注重範圍治療和防護，是團隊中不可或缺的支援角色。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">支援型</span>
-                        <span class="stat-badge">防禦特化</span>
-                        <span class="stat-badge">範圍治療</span>
-                    </div>
-                </div>
-
-                <!-- 瑠波 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <img src="assets/images/舞獅_0.png" alt="瑠波" class="pixel pixel-character">
-                        </div>
-                        <div class="character-info">
-                            <h3>瑠波</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-drum"></i> 雷鳴戰鼓
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        來自東方的節拍大師，使用強力的鼓聲震撼戰場。
-                        擅長近距離戰鬥和地形破壞，是前線的強力戰士。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">攻擊型</span>
-                        <span class="stat-badge">地形破壞</span>
-                        <span class="stat-badge">近戰專精</span>
-                    </div>
-                </div>
-
-                <!-- 艾科 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <img src="assets/images/鐮刀_0.png" alt="艾科" class="pixel pixel-character">
-                        </div>
-                        <div class="character-info">
-                            <h3>艾科</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-microphone"></i> 電子合成器
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        掌握現代電子音樂的科技戰士，能夠產生各種合成音效。
-                        擁有靈活的戰術選擇和強大的範圍攻擊能力。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">技術型</span>
-                        <span class="stat-badge">範圍攻擊</span>
-                        <span class="stat-badge">多變戰術</span>
-                    </div>
-                </div>
-
-                <!-- 莉拉 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <div style="width: 100%; height: 100%; background: var(--pri); display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1.5rem;">
-                                <i class="fas fa-user"></i>
-                            </div>
-                        </div>
-                        <div class="character-info">
-                            <h3>莉拉</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-guitar"></i> 電吉他
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        搖滾樂的叛逆靈魂，使用電吉他釋放狂野的音波能量。
-                        擅長快速移動和爆發性攻擊，是戰場上的游擊專家。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">速攻型</span>
-                        <span class="stat-badge">高機動</span>
-                        <span class="stat-badge">爆發傷害</span>
-                    </div>
-                </div>
-
-                <!-- 薩克斯 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <div style="width: 100%; height: 100%; background: var(--acc); display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1.5rem;">
-                                <i class="fas fa-music"></i>
-                            </div>
-                        </div>
-                        <div class="character-info">
-                            <h3>薩克斯</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-wind"></i> 薩克斯風
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        爵士樂的即興大師，用薩克斯風演奏出變幻莫測的旋律。
-                        能夠適應各種戰術，是最具彈性的全能戰士。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">全能型</span>
-                        <span class="stat-badge">即興戰術</span>
-                        <span class="stat-badge">適應性強</span>
-                    </div>
-                </div>
-
-                <!-- 貝多芬 -->
-                <div class="character-card">
-                    <div class="character-header">
-                        <div class="character-image">
-                            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--pri), var(--acc)); display: flex; align-items: center; justify-content: center; color: var(--ink); font-size: 1.5rem;">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                        </div>
-                        <div class="character-info">
-                            <h3>貝多芬</h3>
-                            <p class="character-weapon">
-                                <i class="fas fa-piano"></i> 大鋼琴
-                            </p>
-                        </div>
-                    </div>
-                    <p class="character-description">
-                        傳說中的音樂大師，掌握著最純粹的音樂力量。
-                        擁有強大的範圍技能和指揮能力，是戰場上的領導者。
-                    </p>
-                    <div class="character-stats">
-                        <span class="stat-badge">傳奇級</span>
-                        <span class="stat-badge">指揮系</span>
-                        <span class="stat-badge">範圍控制</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 角色使用率統計 -->
-    <section class="section" style="background: rgba(18, 24, 33, 0.5);">
-        <div class="container">
-            <h2 class="section-title">角色使用率統計</h2>
-            <div class="chart-container">
-                <h3 class="chart-title">玩家選擇偏好（過去30天）</h3>
-                <canvas id="characterUsageChart" width="400" height="200"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <!-- 角色搭配建議 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">戰術搭配建議</h2>
-            <div class="grid grid-2">
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-shield-alt"></i>
-                        防守型組合
-                    </div>
-                    <div class="card-content">
-                        <p><strong>卡兒芬 + 貝多芬</strong></p>
-                        <p>以防禦和控制為主的穩健組合。卡兒芬提供治療支援，貝多芬負責範圍控制和指揮協調。適合喜歡策略性遊戲的玩家。</p>
-                        <div class="character-stats mt-sm">
-                            <span class="stat-badge">高生存力</span>
-                            <span class="stat-badge">團隊協作</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-sword"></i>
-                        攻擊型組合
-                    </div>
-                    <div class="card-content">
-                        <p><strong>瑠波 + 莉拉</strong></p>
-                        <p>快速突擊的激進組合。瑠波負責破壞地形和前線攻擊，莉拉提供高機動性和爆發傷害。適合喜歡激烈戰鬥的玩家。</p>
-                        <div class="character-stats mt-sm">
-                            <span class="stat-badge">高攻擊力</span>
-                            <span class="stat-badge">快節奏</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-balance-scale"></i>
-                        平衡型組合
-                    </div>
-                    <div class="card-content">
-                        <p><strong>艾科 + 薩克斯</strong></p>
-                        <p>攻守兼備的均衡組合。艾科提供技術性戰術選擇，薩克斯負責靈活應對。適合各種戰況的萬能組合。</p>
-                        <div class="character-stats mt-sm">
-                            <span class="stat-badge">均衡發展</span>
-                            <span class="stat-badge">適應性強</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-title">
-                        <i class="fas fa-star"></i>
-                        新手推薦
-                    </div>
-                    <div class="card-content">
-                        <p><strong>卡兒芬 + 薩克斯</strong></p>
-                        <p>適合新手入門的友善組合。卡兒芬的支援能力能夠彌補操作失誤，薩克斯的全能性讓新手能夠學習各種戰術。</p>
-                        <div class="character-stats mt-sm">
-                            <span class="stat-badge">容錯率高</span>
-                            <span class="stat-badge">學習友善</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 頁腳 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>艾爾芙卡</h3>
-                    <p>在『聲音』中改寫地形的戰棋對決</p>
-                    <p>電子世界『艾爾芙卡』：能以正確的聲音創造、摧毀與改變萬物。</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>快速連結</h3>
-                    <ul>
-                        <li><a href="download.html">下載遊戲</a></li>
-                        <li><a href="world.html">世界觀</a></li>
-                        <li><a href="characters.html">角色介紹</a></li>
-                        <li><a href="gameplay.html">遊戲玩法</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>開發團隊</h3>
-                    <p><strong>結束樂隊</strong></p>
-                    <p>指導教授：廖世傑、吳思璿</p>
-                    <ul>
-                        <li>蘇柏穎</li>
-                        <li>黃鉉展</li>
-                        <li>唐義君</li>
-                        <li>陳廷安</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>聯絡我們</h3>
-                    <div class="contact-info">
-                        <p>追蹤我們的最新動態</p>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/elvka_game/" target="_blank" class="social-link">
-                                <img src="assets/images/IG_0.png" alt="Instagram" style="width: 32px; height: 32px; margin-right: 8px;">
-                                @elvka_game
-                            </a>
-                        </div>
-                        <div class="qr-section">
-                            <p style="margin-bottom: var(--space-xs); color: var(--muted); font-size: 0.9rem;">掃描 QR Code 關注我們</p>
-                            <img src="assets/images/qrcode.png" alt="Instagram QR Code" class="qr-code">
-                        </div>
-                        <div class="contact-details">
-                            <p><strong>開發團隊：</strong>結束樂隊</p>
-                            <p><strong>聯絡信箱：</strong>elvka.game@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 艾爾芙卡 - 結束樂隊. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        // 預載器
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.body.classList.add('loaded');
-            }, 500);
-        });
-
-        // 導航列滾動效果
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Chart.js 統計圖
-        const ctx = document.getElementById('characterUsageChart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['卡兒芬', '瑠波', '艾科', '莉拉', '薩克斯', '貝多芬'],
-                datasets: [{
-                    label: '使用率 (%)',
-                    data: [28, 22, 18, 15, 12, 5],
-                    backgroundColor: [
-                        'rgba(47, 119, 200, 0.8)',
-                        'rgba(100, 199, 230, 0.8)',
-                        'rgba(47, 119, 200, 0.6)',
-                        'rgba(100, 199, 230, 0.6)',
-                        'rgba(47, 119, 200, 0.4)',
-                        'rgba(100, 199, 230, 0.4)'
-                    ],
-                    borderColor: [
-                        '#2F77C8',
-                        '#64C7E6',
-                        '#2F77C8',
-                        '#64C7E6',
-                        '#2F77C8',
-                        '#64C7E6'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#64C7E6'
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 35,
-                        ticks: {
-                            color: '#91A4B6'
-                        },
-                        grid: {
-                            color: 'rgba(145, 164, 182, 0.2)'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            color: '#91A4B6'
-                        },
-                        grid: {
-                            color: 'rgba(145, 164, 182, 0.2)'
-                        }
-                    }
-                }
-            }
-        });
-
-        // 滾動動畫
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
-
-        // 觀察所有元素
-        document.querySelectorAll('.card, .character-card, .chart-container').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>

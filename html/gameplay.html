@@ -1,509 +1,250 @@
-<!DOCTYP    <!-- Favicon -->
-    <link rel="icon" href="assets/images/logo.png" type="image/png">html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-                  <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>艾爾芙卡玩法介紹 - 創新戰棋規則</title>
-    <meta name="description" content="了解艾爾芙卡的核心規則、對戰流程、地形系統與QTE機制">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="assets/images/logo.png" type="image/png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/brand-new.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* 玩法頁面專用樣式 */
-        .gameplay-section {
-            background: var(--card);
-            border: 1px solid #1b2533;
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin-bottom: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gameplay-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="noise" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23noise)"/></svg>');
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        
-        .gameplay-title {
-            color: var(--acc);
-            margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .gameplay-title i {
-            color: var(--pri);
-        }
-        
-        .rules-list {
-            list-style: none;
-            padding: 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .rules-list li {
-            background: rgba(47, 119, 200, 0.1);
-            border-left: 4px solid var(--pri);
-            padding: var(--space-sm);
-            margin-bottom: var(--space-sm);
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            color: var(--muted);
-        }
-        
-        .rules-list li strong {
-            color: var(--acc);
-        }
-        
-        .process-step {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .step-number {
-            width: 48px;
-            height: 48px;
-            background: var(--pri);
-            color: var(--ink);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-        
-        .step-content {
-            flex: 1;
-        }
-        
-        .step-content h4 {
-            color: var(--acc);
-            margin-bottom: var(--space-xs);
-        }
-        
-        .step-content p {
-            color: var(--muted);
-            margin-bottom: 0;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: var(--radius-lg);
-            background: var(--card);
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--pri), var(--acc));
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--ink);
-            font-size: 4rem;
-        }
-        
-        .video-placeholder p {
-            font-size: 1.25rem;
-            margin-top: var(--space-sm);
-            font-weight: 600;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>艾爾芙卡玩法介紹 | 三人編隊、地形等級與強化攻擊</title>
+    <meta name="description" content="了解艾爾芙卡正式版的核心玩法：三人編隊、戰前站位、地形 1 到 3 級規則、10 點行動點數，以及每位角色的強化攻擊條件。">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/elvka-refresh.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+<body class="site-body page-gameplay">
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html">
+                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <span class="brand-text">
+                        <span class="brand-title">艾爾芙卡 ELVKA</span>
+                        <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
+                    </span>
+                </a>
+                <nav class="site-nav" aria-label="主要導覽">
+                    <a href="index.html">首頁</a>
+                    <a href="world.html">世界展示</a>
+                    <a href="characters.html">角色展示</a>
+                    <a class="is-active" href="gameplay.html">玩法介紹</a>
+                    <a href="download.html">下載試玩</a>
+                </nav>
+            </div>
+        </header>
 
-<body>
-    <!-- 預載器 -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
+        <main>
+            <section class="page-hero">
+                <div class="container page-hero-grid">
+                    <div class="page-copy">
+                        <span class="eyebrow">Gameplay / 正式版規則</span>
+                        <h1 class="page-title">先選三人、再排站位，<span class="accent">最後把高度與強化條件串起來</span></h1>
+                        <p class="page-lead">《艾爾芙卡》的核心玩法圍繞在陣容配置、站位策略與地形操控。玩家需要在戰鬥開始前完成三人配隊與部署，進場後再利用多層高度、技能改地與 10 點行動點數，逐步建立戰術優勢。</p>
+                        <div class="pill-row">
+                            <span>三人編隊</span>
+                            <span>戰前站位</span>
+                            <span>地形 1 到 3 級</span>
+                            <span>強化攻擊</span>
+                        </div>
+                    </div>
+                    <div class="page-visual">
+                        <img src="assets/images/elvka/cards/Xuanduo_C5ult.png" alt="艾爾芙卡代表技能卡構圖">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">官方實戰影片</span>
+                        <h2>先看一場正式版實機，最快理解這套規則如何實際運作</h2>
+                        <p>影片裡最值得注意的是戰前佈位、高度爭奪、技能改地與強化攻擊的覆蓋時機如何接成同一個回合。</p>
+                    </div>
+
+                    <div class="video-showcase">
+                        <div class="video-frame" id="gameplay-video-frame" data-embed-src="https://www.youtube-nocookie.com/embed/glb0d_-3Oug?rel=0"></div>
+                        <article class="surface-panel">
+                            <span class="section-kicker">觀看片段時可以注意</span>
+                            <h3 class="panel-title">誰先排出有利開局、誰先卡高地、誰先讓普通攻擊切換成強化攻擊</h3>
+                            <p class="lead-copy">正式版的節奏不是憑空爆發，而是來自角色條件、地形等級與行動點數分配被正確接在一起。</p>
+                            <div class="hero-actions">
+                                <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=glb0d_-3Oug" target="_blank" rel="noreferrer"><i class="fa-brands fa-youtube"></i>在 YouTube 開啟影片</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">四大系統</span>
+                        <h2>正式企畫書把玩法拆成四套互相咬合的系統</h2>
+                    </div>
+
+                    <div class="metric-grid">
+                        <article class="info-card">
+                            <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
+                            <h3>隊伍編輯系統</h3>
+                            <p>每關都要從角色池挑出三名不重複角色，先把隊伍組合與初始站位排好。</p>
+                        </article>
+                        <article class="info-card">
+                            <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <h3>角色能力系統</h3>
+                            <p>每位角色都擁有技能與強化攻擊，且技能本身就會帶有改變地形高低的效果。</p>
+                        </article>
+                        <article class="info-card">
+                            <div class="card-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+                            <h3>地形變化系統</h3>
+                            <p>高度會決定加成、推落與引爆後果，普通攻擊與技能都會持續重寫戰場。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">回合流程</span>
+                        <h2>一場艾爾芙卡，通常會沿著這四個節點一路推進</h2>
+                    </div>
+
+                    <div class="timeline">
+                        <article class="timeline-step">
+                            <div class="timeline-index">1</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">先組隊與佈位</h3>
+                                <p>從角色池挑出三人，並在指定區域安排初始位置，決定第一回合攻守線。</p>
+                            </div>
+                        </article>
+                        <article class="timeline-step">
+                            <div class="timeline-index">2</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">爭奪高度</h3>
+                                <p>角色站上有利高度能觸發額外能力，也更容易把強化攻擊條件湊齊。</p>
+                            </div>
+                        </article>
+                        <article class="timeline-step">
+                            <div class="timeline-index">3</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">改地形與推位</h3>
+                                <p>技能可以升高、降低或指定區域高度，普通攻擊也能把敵人推上去或推下來。</p>
+                            </div>
+                        </article>
+                        <article class="timeline-step">
+                            <div class="timeline-index">4</div>
+                            <div class="timeline-copy">
+                                <h3 class="timeline-title">分配行動點數</h3>
+                                <p>每回合 10 點行動點數可自由分配，決定你要集中單點爆發還是整隊同步推進。</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container split-layout">
+                    <div class="media-stack">
+                        <figure class="art-card">
+                            <img src="assets/images/elvka/cards/Jiangying_C4ult.png" alt="絳纓技能卡構圖">
+                            <figcaption class="art-caption"><i class="fa-solid fa-burst"></i>正式版的角色技能幾乎都和位移、高度與強化條件直接相連。</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="media-copy">
+                        <span class="section-kicker">地形規則</span>
+                        <h3>你操作的不只是角色，而是整個高度結構本身</h3>
+                        <p>正式企畫書把地形規則寫得非常具體。理解這些規則，才會知道為什麼某些回合看起來只是站位，其實已經在鋪後面的引爆或強化條件。</p>
+                        <ul class="bullet-list">
+                            <li>地形等級最低為 1，最高為 3。</li>
+                            <li>地形若被疊到 3 級以上，該行動結束後會從上方開始引爆，每次引爆 3 層直到低於 3。</li>
+                            <li>地形永遠不會低於 1 級。</li>
+                            <li>角色不能一次跨越高低差距 2 級以上的地形。</li>
+                            <li>從高等級 1 被推到等級 3 會彈回原位、受傷並引爆該地形；從等級 3 被推到等級 1 也會承受衰落傷害。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="section-heading">
+                        <span class="section-kicker">回合資源與條件</span>
+                        <h2>真正的操作重點，是用 10 點行動把條件換成優勢</h2>
+                    </div>
+
+                    <div class="feature-grid">
+                        <article class="info-card">
+                            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <h3>10 點行動點數</h3>
+                            <p>移動、攻擊與技能都會消耗行動點。只要點數足夠，同一角色也能在單回合內連續推進。</p>
+                        </article>
+                        <article class="info-card">
+                            <div class="card-icon"><i class="fa-solid fa-sword"></i></div>
+                            <h3>強化攻擊覆蓋普通攻擊</h3>
+                            <p>當角色達成指定高度或條件時，普通攻擊會被強化攻擊覆蓋。這有時是爆發窗口，有時也可能反成限制。</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <article class="quote-panel">
+                        <p>正式版的艾爾芙卡，不是先把人送上前線再看情況，而是從配隊、站位、地形到行動點數，一整回合都必須先算好。</p>
+                        <span>玩法核心</span>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-panel">
+                <section>
+                    <h2 class="footer-title">艾爾芙卡 ELVKA</h2>
+                    <p class="footer-copy">三人編隊、地形等級、強化攻擊與 10 點行動點數，共同構成正式版的戰術骨架。</p>
+                </section>
+                <section>
+                    <h3 class="panel-title">頁面導覽</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">首頁</a></li>
+                        <li><a href="world.html">世界展示</a></li>
+                        <li><a href="characters.html">角色展示</a></li>
+                        <li><a href="download.html">下載試玩</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="panel-title">開發資訊</h3>
+                    <p class="footer-meta">團隊：結束樂隊</p>
+                    <p class="footer-meta">指導教授：廖世傑、吳思璿</p>
+                    <p class="footer-meta">聯絡信箱：elvka.game@gmail.com</p>
+                </section>
+            </div>
+        </footer>
     </div>
-
-    <!-- 導航列 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index-new.html" class="nav-brand">
-                <img src="assets/images/logo.png" alt="艾爾芙卡 Logo" class="nav-logo">
-                艾爾芙卡
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index-new.html" class="nav-link">首頁</a></li>
-                <li><a href="download.html" class="nav-link">下載點</a></li>
-                <li><a href="world.html" class="nav-link">世界展示</a></li>
-                <li><a href="characters.html" class="nav-link">角色展示</a></li>
-                <li><a href="gameplay.html" class="nav-link active">玩法介紹</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero 區塊 -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
-                <div class="hero-text">
-                    <h1 class="hero-title">遊戲玩法</h1>
-                    <p class="hero-subtitle">創新的戰棋體驗：地形變化 × QTE互動 × 聲音戰鬥</p>
-                    <p class="hero-description">
-                        結合傳統戰棋策略與現代互動元素的全新遊戲模式。
-                        每場戰鬥都是音樂與策略的完美結合。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 核心規則 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">核心規則</h2>
-            
-            <div class="gameplay-section">
-                <h3 class="gameplay-title">
-                    <i class="fas fa-chess"></i>
-                    基礎遊戲流程
-                </h3>
-                <ul class="rules-list">
-                    <li>
-                        <strong>先攻決定：</strong>遊戲開始時擲硬幣決定攻守順序，獲勝方可選擇先攻或後攻。
-                    </li>
-                    <li>
-                        <strong>回合結構：</strong>每回合包含『移動/普攻/技能』三個階段，玩家可自由選擇行動順序。
-                    </li>
-                    <li>
-                        <strong>勝利條件：</strong>率先擊敗對方所有角色，或在限定回合內擁有更高總血量的玩家獲勝。
-                    </li>
-                    <li>
-                        <strong>時間限制：</strong>每回合限時90秒，超時將自動跳過該回合，維持遊戲節奏。
-                    </li>
-                </ul>
-            </div>
-
-            <div class="gameplay-section">
-                <h3 class="gameplay-title">
-                    <i class="fas fa-mountain"></i>
-                    地形變化系統
-                </h3>
-                <ul class="rules-list">
-                    <li>
-                        <strong>地形升降：</strong>角色可使用技能改變戰場地形高度，創造高低差優勢。
-                    </li>
-                    <li>
-                        <strong>推擠機制：</strong>地形升起時會推擠站在其上的角色，可能造成位移或傷害。
-                    </li>
-                    <li>
-                        <strong>視線遮蔽：</strong>高地形可能阻擋遠程攻擊的視線，增加策略深度。
-                    </li>
-                    <li>
-                        <strong>位置優勢：</strong>站在高地的角色獲得攻擊力加成和防禦優勢。
-                    </li>
-                </ul>
-            </div>
-
-            <div class="gameplay-section">
-                <h3 class="gameplay-title">
-                    <i class="fas fa-shield-alt"></i>
-                    QTE 互動系統
-                </h3>
-                <ul class="rules-list">
-                    <li>
-                        <strong>防守反擊：</strong>被攻擊時，防守方可透過QTE操作減少傷害或反擊。
-                    </li>
-                    <li>
-                        <strong>精準時機：</strong>攻擊方也能透過QTE增加傷害或觸發特殊效果。
-                    </li>
-                    <li>
-                        <strong>技能增強：</strong>成功的QTE操作能夠強化技能效果或延長持續時間。
-                    </li>
-                    <li>
-                        <strong>連段系統：</strong>連續成功的QTE可以形成連段，大幅提升傷害。
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 對戰流程 -->
-    <section class="section" style="background: rgba(18, 24, 33, 0.5);">
-        <div class="container">
-            <h2 class="section-title">對戰流程</h2>
-            
-            <div class="gameplay-section">
-                <h3 class="gameplay-title">
-                    <i class="fas fa-play"></i>
-                    完整對戰步驟
-                </h3>
-                
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>角色選擇</h4>
-                        <p>雙方玩家從可用角色中選擇2位戰士，考慮角色間的搭配與戰術組合。每位角色都有獨特的技能和戰鬥風格。</p>
-                    </div>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>戰場準備</h4>
-                        <p>系統隨機生成戰場地形，包含高地、平地和特殊地形。玩家需要觀察地形特徵，制定初步戰術。</p>
-                    </div>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>先攻決定</h4>
-                        <p>透過擲硬幣或其他隨機方式決定先攻玩家。先攻玩家獲得第一回合的行動權，但也可能暴露戰術意圖。</p>
-                    </div>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>回合戰鬥</h4>
-                        <p>雙方輪流進行回合，每回合可進行移動、攻擊和使用技能。戰鬥中會出現QTE提示，成功操作能獲得額外優勢。</p>
-                    </div>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>勝負判定</h4>
-                        <p>當一方所有角色被擊敗，或達到最大回合限制時，戰鬥結束。根據剩餘角色數量和血量判定勝負。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 遊戲特色 -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">遊戲特色機制</h2>
-            <div class="grid grid-3">
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>聲音戰鬥</h4>
-                        <p>每個攻擊和技能都伴隨著獨特的音效和音樂，玩家可以透過聲音判斷戰況和時機。不同角色的音樂風格也會影響戰場氛圍。</p>
-                    </div>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-magic"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>動態戰場</h4>
-                        <p>戰場不是靜態的背景，而是活躍的戰鬥元素。地形會因為角色技能而改變，創造出千變萬化的戰術可能性。</p>
-                    </div>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>即時互動</h4>
-                        <p>QTE系統讓防守不再被動，每次攻防都充滿變數。精準的操作能夠逆轉劣勢，增加戰鬥的刺激感。</p>
-                    </div>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>角色搭配</h4>
-                        <p>不同角色間有複雜的搭配關係，攻擊型、防禦型和輔助型角色需要巧妙組合才能發揮最大效果。</p>
-                    </div>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>快節奏</h4>
-                        <p>每局遊戲控制在10-20分鐘內，適合現代人的生活節奏。短時間內的高強度策略對決，讓每分每秒都充滿張力。</p>
-                    </div>
-                </div>
-
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h4>競技匹配</h4>
-                        <p>智能匹配系統確保對戰的公平性，同時提供排位賽和休閒模式，滿足不同類型玩家的需求。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 遊戲影片 -->
-    <section class="section" style="background: rgba(18, 24, 33, 0.5);">
-        <div class="container">
-            <h2 class="section-title">遊戲實況展示</h2>
-            <div class="video-container">
-                <!-- YouTube 影片嵌入區域 -->
-                <div class="video-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                    <p>遊戲實況影片</p>
-                    <p style="font-size: 1rem; margin-top: var(--space-xs);">敬請期待</p>
-                </div>
-                <!-- 實際使用時可替換為：
-                <iframe 
-                    src="https://www.youtube.com/embed/VIDEO_ID" 
-                    title="艾爾芙卡遊戲實況"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                -->
-            </div>
-        </div>
-    </section>
-
-    <!-- 頁腳 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>艾爾芙卡</h3>
-                    <p>在『聲音』中改寫地形的戰棋對決</p>
-                    <p>電子世界『艾爾芙卡』：能以正確的聲音創造、摧毀與改變萬物。</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>快速連結</h3>
-                    <ul>
-                        <li><a href="download.html">下載遊戲</a></li>
-                        <li><a href="world.html">世界觀</a></li>
-                        <li><a href="characters.html">角色介紹</a></li>
-                        <li><a href="gameplay.html">遊戲玩法</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>開發團隊</h3>
-                    <p><strong>結束樂隊</strong></p>
-                    <p>指導教授：廖世傑、吳思璿</p>
-                    <ul>
-                        <li>蘇柏穎</li>
-                        <li>黃鉉展</li>
-                        <li>唐義君</li>
-                        <li>陳廷安</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>聯絡我們</h3>
-                    <div class="contact-info">
-                        <p>追蹤我們的最新動態</p>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/elvka_game/" target="_blank" class="social-link">
-                                <img src="assets/images/IG_0.png" alt="Instagram" style="width: 32px; height: 32px; margin-right: 8px;">
-                                @elvka_game
-                            </a>
-                        </div>
-                        <div class="qr-section">
-                            <p style="margin-bottom: var(--space-xs); color: var(--muted); font-size: 0.9rem;">掃描 QR Code 關注我們</p>
-                            <img src="assets/images/qrcode.png" alt="Instagram QR Code" class="qr-code">
-                        </div>
-                        <div class="contact-details">
-                            <p><strong>開發團隊：</strong>結束樂隊</p>
-                            <p><strong>聯絡信箱：</strong>elvka.game@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 艾爾芙卡 - 結束樂隊. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
     <script>
-        // 預載器
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.body.classList.add('loaded');
-            }, 500);
-        });
-
-        // 導航列滾動效果
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        (function() {
+            var videoFrame = document.getElementById("gameplay-video-frame");
+            if (!videoFrame) {
+                return;
             }
-        });
 
-        // 滾動動畫
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            var embedSrc = videoFrame.getAttribute("data-embed-src");
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
+            if (window.location.protocol !== "file:") {
+                videoFrame.innerHTML = '<iframe src="' + embedSrc + '" title="艾爾芙卡官方試玩影片" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                return;
+            }
 
-        // 觀察所有元素
-        document.querySelectorAll('.gameplay-section, .process-step, .feature-item, .video-container').forEach(el => {
-            observer.observe(el);
-        });
+            videoFrame.classList.add("is-embed-fallback");
+            videoFrame.innerHTML = [
+                '<div class="video-fallback">',
+                '  <span class="video-fallback-kicker">本機預覽限制</span>',
+                '  <h3>這個環境無法直接嵌入 YouTube 播放器</h3>',
+                '  <p>目前是以 file 預覽頁面，YouTube 會因缺少 referrer 拒絕載入。部署到一般網站或用本機 HTTP 伺服器開啟時，內嵌播放器就會正常顯示。</p>',
+                '  <div class="hero-actions">',
+                '    <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=glb0d_-3Oug" target="_blank" rel="noreferrer"><i class="fa-brands fa-youtube"></i>在 YouTube 開啟影片</a>',
+                '  </div>',
+                '</div>'
+            ].join('');
+        })();
     </script>
 </body>
 </html>
