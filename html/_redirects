@@ -1,6 +1,5 @@
-# 重定向規則
-/index.html   /index-new.html   301
-/             /index-new.html   200
+# 首頁
+/             /index.html       200
 
-# 確保所有路由都能找到對應的 HTML 檔案
-/*            /index-new.html   200
+# 其他未知路徑導回首頁
+/*            /index.html       200

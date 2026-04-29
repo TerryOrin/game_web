@@ -24,30 +24,28 @@
 
 ### 1. 檔案路徑檢查
 確保以下檔案能正常訪問：
-- `/` → `index-new.html`（需要設置為預設首頁）
+- `/` → `index.html`
 - `/world.html` → 世界觀頁面
 - `/characters.html` → 角色介紹頁面
 - `/gameplay.html` → 遊戲玩法頁面
 - `/download.html` → 下載頁面
 
 ### 2. 資源檔案檢查
-- ✅ CSS 檔案: `/assets/css/brand-new.css`
+- ✅ CSS 檔案: `/assets/css/elvka-refresh.css`
 - ✅ 圖片檔案: `/assets/images/`
-- ✅ JavaScript 檔案: `/assets/js/app.js`
-- ✅ Logo: `/assets/images/LOGO.png`
-- ✅ IG 圖標: `/assets/images/IG_0.png`
-- ✅ QR Code: `/assets/images/qrcode.png`
+- ✅ 角色 GIF: `/assets/media/elvka/gifs/`
+- ✅ Logo: `/assets/images/logo.png`
+- ✅ QR Code: `/assets/images/elvka/ig-qrcode.png`
 
 ### 3. 重定向設置
 創建 `_redirects` 檔案在 html 目錄中：
 
 ```
-# 首頁重定向
-/index.html   /index-new.html   301
-/             /index-new.html   200
+# 首頁
+/             /index.html       200
 
-# SPA 支持（如果需要）
-/*            /index-new.html   200
+# 其他未知路徑導回首頁
+/*            /index.html       200
 ```
 
 ### 4. 標頭設置

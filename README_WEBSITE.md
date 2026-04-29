@@ -8,16 +8,21 @@
 
 ```
 艾爾芙卡遊戲網站/
-├── index.html          # 首頁 - 電梯稿 + 主視覺 + 四大分頁入口 + 最新公告
-├── download.html       # 下載點 - 三平台下載 + 安裝說明 + 系統需求
-├── world.html          # 世界展示 - 世界觀摘要 + 場景圖牆 + 聲音元素
-├── characters.html     # 角色展示 - 角色卡片 + 使用率圖表 + 技能系統
-├── gameplay.html       # 玩法介紹 - 核心規則 + 地形/QTE 系統 + 影片
-├── styles.css          # 全域樣式系統
-├── app.js             # JavaScript 功能 + Chart.js 圖表
-├── images/            # 圖片資源目錄
-├── builds/            # 下載檔案目錄
-└── ASSETS_README.md   # 資源說明文件
+├── index.html          # 首頁 - 主視覺、世界入口、角色入口、影片與下載導流
+├── world.html          # 世界展示 - 表世界 / 裏世界、裂縫、族群與災禍
+├── characters.html     # 角色展示 - 六位角色、技能卡、GIF 動態與實戰片段
+├── gameplay.html       # 玩法介紹 - 三人編隊、地形規則、行動點與實戰影片
+├── download.html       # 下載頁 - PC 試玩、社群與聯絡方式
+├── 404.html            # 錯誤頁
+├── _headers            # 靜態站標頭設定
+├── _redirects          # 靜態站導向設定
+├── assets/
+│   ├── css/
+│   │   └── elvka-refresh.css
+│   ├── images/
+│   └── media/
+├── builds/             # 下載檔案目錄
+└── favicon.ico
 ```
 
 ## 功能特色
