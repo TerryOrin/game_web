@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>艾爾芙卡世界觀 | 表世界、裏世界與赤城裂縫</title>
     <meta name="description" content="認識艾爾芙卡正式版世界觀：表世界與裏世界、永夜海洋、卡爾維恩前哨站、赤城血族、洛瑟恩黑暗區，以及席拉姆尼留下的異獸入侵。">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/LOGO.png">
+    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="assets/css/elvka-refresh.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -14,13 +15,16 @@
         <header class="site-header">
             <div class="container header-inner">
                 <a class="brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <img src="assets/images/LOGO.png" alt="艾爾芙卡標誌">
                     <span class="brand-text">
                         <span class="brand-title">艾爾芙卡 ELVKA</span>
                         <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
                     </span>
                 </a>
-                <nav class="site-nav" aria-label="主要導覽">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-label="切換導覽">
+                    <span></span>
+                </button>
+                <nav class="site-nav" id="site-nav" aria-label="主要導覽">
                     <a href="index.html">首頁</a>
                     <a class="is-active" href="world.html">世界展示</a>
                     <a href="characters.html">角色展示</a>
@@ -187,5 +191,7 @@
             </div>
         </footer>
     </div>
+    <script src="assets/js/page-transitions.js"></script>
+    <script src="assets/js/site-motion.js"></script>
 </body>
 </html>

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>艾爾芙卡玩法介紹 | 三人編隊、地形等級與強化攻擊</title>
     <meta name="description" content="了解艾爾芙卡正式版的核心玩法：三人編隊、戰前站位、地形 1 到 3 級規則、10 點行動點數，以及每位角色的強化攻擊條件。">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/LOGO.png">
+    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="assets/css/elvka-refresh.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -14,13 +15,16 @@
         <header class="site-header">
             <div class="container header-inner">
                 <a class="brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <img src="assets/images/LOGO.png" alt="艾爾芙卡標誌">
                     <span class="brand-text">
                         <span class="brand-title">艾爾芙卡 ELVKA</span>
                         <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
                     </span>
                 </a>
-                <nav class="site-nav" aria-label="主要導覽">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-label="切換導覽">
+                    <span></span>
+                </button>
+                <nav class="site-nav" id="site-nav" aria-label="主要導覽">
                     <a href="index.html">首頁</a>
                     <a href="world.html">世界展示</a>
                     <a href="characters.html">角色展示</a>
@@ -59,7 +63,7 @@
                     </div>
 
                     <div class="video-showcase">
-                        <div class="video-frame" id="gameplay-video-frame" data-embed-src="https://www.youtube-nocookie.com/embed/glb0d_-3Oug?rel=0"></div>
+                        <div class="video-frame" id="gameplay-video-frame" data-embed-src="https://www.youtube-nocookie.com/embed/glb0d_-3Oug?rel=0" data-watch-url="https://www.youtube.com/watch?v=glb0d_-3Oug" data-video-title="艾爾芙卡官方試玩影片"></div>
                         <article class="surface-panel">
                             <span class="section-kicker">觀看片段時可以注意</span>
                             <h3 class="panel-title">誰先排出有利開局、誰先卡高地、誰先讓普通攻擊切換成強化攻擊</h3>
@@ -219,32 +223,8 @@
             </div>
         </footer>
     </div>
-    <script>
-        (function() {
-            var videoFrame = document.getElementById("gameplay-video-frame");
-            if (!videoFrame) {
-                return;
-            }
-
-            var embedSrc = videoFrame.getAttribute("data-embed-src");
-
-            if (window.location.protocol !== "file:") {
-                videoFrame.innerHTML = '<iframe src="' + embedSrc + '" title="艾爾芙卡官方試玩影片" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                return;
-            }
-
-            videoFrame.classList.add("is-embed-fallback");
-            videoFrame.innerHTML = [
-                '<div class="video-fallback">',
-                '  <span class="video-fallback-kicker">本機預覽限制</span>',
-                '  <h3>這個環境無法直接嵌入 YouTube 播放器</h3>',
-                '  <p>目前是以 file 預覽頁面，YouTube 會因缺少 referrer 拒絕載入。部署到一般網站或用本機 HTTP 伺服器開啟時，內嵌播放器就會正常顯示。</p>',
-                '  <div class="hero-actions">',
-                '    <a class="btn btn-secondary" href="https://www.youtube.com/watch?v=glb0d_-3Oug" target="_blank" rel="noreferrer"><i class="fa-brands fa-youtube"></i>在 YouTube 開啟影片</a>',
-                '  </div>',
-                '</div>'
-            ].join('');
-        })();
-    </script>
+    <script src="assets/js/page-transitions.js"></script>
+    <script src="assets/js/video-embeds.js"></script>
+    <script src="assets/js/site-motion.js"></script>
 </body>
 </html>

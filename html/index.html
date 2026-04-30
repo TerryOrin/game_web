@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>艾爾芙卡 | 三人編隊、站位策略與地形操控的戰棋遊戲</title>
     <meta name="description" content="艾爾芙卡是以三人編隊、戰前站位、地形高度、強化攻擊與行動點數為核心的 PC 戰棋遊戲，故事從赤城北方的巨型裂縫爆發開始。">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/images/LOGO.png">
+    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
     <link rel="stylesheet" href="assets/css/elvka-refresh.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
@@ -14,13 +15,16 @@
         <header class="site-header">
             <div class="container header-inner">
                 <a class="brand" href="index.html">
-                    <img src="assets/images/logo.png" alt="艾爾芙卡標誌">
+                    <img src="assets/images/LOGO.png" alt="艾爾芙卡標誌">
                     <span class="brand-text">
                         <span class="brand-title">艾爾芙卡 ELVKA</span>
                         <span class="brand-subtitle">三人編隊 × 地形戰棋</span>
                     </span>
                 </a>
-                <nav class="site-nav" aria-label="主要導覽">
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-label="切換導覽">
+                    <span></span>
+                </button>
+                <nav class="site-nav" id="site-nav" aria-label="主要導覽">
                     <a class="is-active" href="index.html">首頁</a>
                     <a href="world.html">世界展示</a>
                     <a href="characters.html">角色展示</a>
@@ -31,47 +35,58 @@
         </header>
 
         <main>
-            <section class="hero-section">
-                <div class="container hero-grid">
-                    <div class="hero-copy">
-                        <span class="eyebrow">2026 放視大賞參賽作品 / Tactical SRPG</span>
-                        <h1 class="display-title">在赤城裂縫失控後<br><span class="accent">排出你的三人戰線</span></h1>
-                        <p class="lead-copy">《艾爾芙卡》是一款以陣容配置、站位策略與地形操控為核心的戰棋遊戲。玩家要先從角色池排出三名不重複的角色，再在戰前指定區域安排初始位置，進場後以高度差、技能與強化攻擊逐步接管整個戰場。</p>
-                        <div class="hero-actions">
-                            <a class="btn" href="download.html"><i class="fa-solid fa-download"></i>下載電腦版試玩</a>
-                            <a class="btn btn-secondary" href="gameplay.html"><i class="fa-solid fa-play"></i>觀看實戰玩法</a>
-                        </div>
-                        <div class="stat-strip">
-                            <article class="stat-card">
-                                <div class="stat-label">戰鬥編制</div>
-                                <div class="stat-value">三名不重複角色</div>
-                                <p class="lead-copy">每個關卡都要先選隊，再排站位，戰術壓力從開局前就已經開始。</p>
-                            </article>
-                            <article class="stat-card">
-                                <div class="stat-label">關卡節奏</div>
-                                <div class="stat-value">每關約 3~5 分鐘</div>
-                                <p class="lead-copy">正式版把決策壓縮在短關卡裡，讓每一步站位與高度選擇都更直接。</p>
-                            </article>
-                            <article class="stat-card">
-                                <div class="stat-label">回合資源</div>
-                                <div class="stat-value">10 點行動點數</div>
-                                <p class="lead-copy">你可以把點數全押在單點爆發，也能讓整隊同步前壓與改地形。</p>
-                            </article>
+            <section class="hero-section hero-section--cinematic">
+                <div class="hero-banner" aria-label="懸舵首頁 Hero 海報背景">
+                    <img class="hero-banner-art" src="assets/images/elvka/xuanduo-poster.jpg" alt="懸舵首頁主視覺海報">
+                    <div class="hero-particles" id="hero-particles" aria-hidden="true"></div>
+                    <div class="hero-typography-layer" aria-hidden="true">
+                        <span class="hero-typography-word">XUANDUO</span>
+                        <span class="hero-typography-word hero-typography-word--sub">TACTICAL FORMATION ARC 01</span>
+                    </div>
+                    <div class="container hero-banner-inner">
+                        <div class="hero-copy hero-copy--banner">
+                            <span class="eyebrow eyebrow--hero">2026 放視大賞參賽作品 / Tactical SRPG</span>
+                            <div class="hero-copy-meta">
+                                <span class="hero-banner-character">懸舵 / Xuanduo Focus</span>
+                                <span class="hero-editorial-line">Tactical Formation / Xuanduo Arc 01</span>
+                            </div>
+                            <h1 class="display-title display-title--hero">
+                                <span class="title-line">在赤城裂縫失控後</span>
+                                <span class="title-line accent">排出你的三人戰線</span>
+                            </h1>
+                            <p class="lead-copy">《艾爾芙卡》是一款以陣容配置、站位策略與地形操控為核心的戰棋遊戲。玩家要先從角色池排出三名不重複的角色，再在戰前指定區域安排初始位置，進場後以高度差、技能與強化攻擊逐步接管整個戰場。</p>
+                            <div class="hero-actions">
+                                <a class="btn" href="download.html"><i class="fa-solid fa-download"></i>下載電腦版試玩</a>
+                                <a class="btn btn-secondary" href="gameplay.html"><i class="fa-solid fa-play"></i>觀看實戰玩法</a>
+                            </div>
+                            <p class="hero-banner-note">懸舵與她帶回的古書，正把裂縫異象一路牽回赤城前線，也讓正式版的核心危機第一次有了清楚的人物焦點。</p>
                         </div>
                     </div>
+                    <a class="hero-scroll-cue" href="#home-overview" aria-label="往下查看正式版內容">
+                        <span class="hero-scroll-cue-label">Scroll</span>
+                        <span class="hero-scroll-cue-icon"><i class="fa-solid fa-chevron-down"></i></span>
+                    </a>
+                </div>
+            </section>
 
-                    <div class="visual-stage" aria-label="艾爾芙卡主視覺">
-                        <div class="visual-frame">
-                            <img src="assets/images/elvka/hero-main.jpg" alt="艾爾芙卡六位角色主視覺">
-                        </div>
-                        <aside class="floating-note is-top">
-                            <strong>第一章從赤城北方開打</strong>
-                            <p>巨型裂縫突然張開，貝維塔先行阻擊異獸，琉波帶隊趕往支援。</p>
-                        </aside>
-                        <aside class="floating-note is-bottom">
-                            <strong>六位正式角色</strong>
-                            <p>前哨站、血族與特林三方角色同場作戰，能力與出身都會反映在打法上。</p>
-                        </aside>
+            <section class="section section-tight-top" id="home-overview">
+                <div class="container">
+                    <div class="stat-strip hero-stat-strip">
+                        <article class="stat-card">
+                            <div class="stat-label">戰鬥編制</div>
+                            <div class="stat-value">三名不重複角色</div>
+                            <p class="lead-copy">每個關卡都要先選隊，再排站位，戰術壓力從開局前就已經開始。</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-label">關卡節奏</div>
+                            <div class="stat-value">每關約 3~5 分鐘</div>
+                            <p class="lead-copy">正式版把決策壓縮在短關卡裡，讓每一步站位與高度選擇都更直接。</p>
+                        </article>
+                        <article class="stat-card">
+                            <div class="stat-label">回合資源</div>
+                            <div class="stat-value">10 點行動點數</div>
+                            <p class="lead-copy">你可以把點數全押在單點爆發，也能讓整隊同步前壓與改地形。</p>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -108,8 +123,8 @@
                 <div class="container feature-split">
                     <div class="media-stack">
                         <figure class="art-card poster-card-full">
-                            <img src="assets/images/elvka/xuanduo-poster.jpg" alt="懸舵角色海報">
-                            <figcaption class="art-caption"><i class="fa-solid fa-compass"></i>懸舵與她帶回的古書，是正式版裂縫線索的重要象徵之一。</figcaption>
+                            <img src="assets/images/elvka/hero-main.jpg" alt="艾爾芙卡角色群像">
+                            <figcaption class="art-caption"><i class="fa-solid fa-people-group"></i>六位正式角色會從不同陣營踏上同一條裂縫戰線，打法也因此被切成完全不同的戰術方向。</figcaption>
                         </figure>
                     </div>
 
@@ -139,9 +154,7 @@
                     </div>
 
                     <div class="video-showcase">
-                        <div class="video-frame">
-                            <iframe src="https://www.youtube-nocookie.com/embed/glb0d_-3Oug?rel=0" title="艾爾芙卡官方試玩影片" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <div class="video-frame" id="home-video-frame" data-embed-src="https://www.youtube-nocookie.com/embed/glb0d_-3Oug?rel=0" data-watch-url="https://www.youtube.com/watch?v=glb0d_-3Oug" data-video-title="艾爾芙卡官方試玩影片"></div>
                         <article class="surface-panel">
                             <span class="section-kicker">先看什麼</span>
                             <h3 class="panel-title">留意三件事：開局站位、高度差，以及強化攻擊何時覆蓋普通攻擊</h3>
@@ -253,5 +266,9 @@
             </div>
         </footer>
     </div>
+    <script src="assets/js/page-transitions.js"></script>
+    <script src="assets/js/plugins/particles.js"></script>
+    <script src="assets/js/video-embeds.js"></script>
+    <script src="assets/js/site-motion.js"></script>
 </body>
 </html>
